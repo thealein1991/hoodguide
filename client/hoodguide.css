@@ -17,7 +17,12 @@
 .navbar{
   padding: 5px;
 }
-
+.bg-grey{
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
 .mtl {
   margin-top: 10px;
 }
@@ -49,4 +54,28 @@
   height: 100px;
   background-position: center;
   border: 1px solid #BCBCBC;
+}
+
+.fb-image-small{
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  border: 1px solid #BCBCBC;
+}
+
+#btnRespNav{
+  display:block;
+  font-size: 50px;
+  background-color: transparent;
+  border-style: none;
+}
+
+.slideout-menu{
+  margin-top: 0;
+  background-color:#007772 !important;
+}
+
+.slideout-menu a:hover{
+  background-color:#29b5aa !important;
 }

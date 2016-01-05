@@ -8,22 +8,19 @@
 
 </body>
 
-
-<template name="home">
+<!-- <template name="home">
   <div class="navbar navbar-default" role="navigation">
         test
   </div>
-</template>
+</template> -->
 
 
 <template name="login">
+    {{> slideMenu}}
+    <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
+    </button>
     {{#if currentUser}}
-    <ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="#">Home</a></li>
-      <li role="presentation"><a href="#">Profile</a></li>
-      <li role="presentation"><a href="#">Messages</a></li>
-      <li role="presentation"><a href="#" id="logout">Logout</a></li>
-    </ul>
+
     <div class="text-center bg-berlin">
       <p class="hoodtitle">hoodguide </p><br>
       <img style="background-image:
@@ -35,43 +32,10 @@
         {{currentUser.services.facebook.last_name}}</b>
       </p>
     </div>
-
-      {{#if currentUser.profile.id}}
-        data here, yay
+      {{#if userdataExists}}
+          data here
       {{else}}
-      <div class="container">
-        <p class="mtl">It's your first time on hoodguide, so please fill out the following data:</p>
-        <form class="form-group">
-          <label>Are you using this app as a tourist or a guide?</label><br>
-          <label class="radio-inline"><input type="radio" name="optradio" value="tourist" checked>Tourist</label>
-          <label class="radio-inline"><input type="radio" name="optradio" value="guide">Guide</label>
-          <br><br>
-          <label for="birthdate">Birth Date:</label>
-          <input type="date" class="form-control" id="birthdate">
-          <br>
-          <label for="sel1">Select Hood:</label>
-          <select class="form-control" id="selectHood">
-            <option>Select Hood and then your districts</option>
-            {{#each hood}}
-              <option>{{hoodValue.name}}</option>
-            {{/each}}
-          </select>
-
-          <div class="checkbox" id="checkDistricts" style="visibility:hidden">
-            {{#each districts}}
-              <div class="animated fadeIn">
-                <label><input type="checkbox" name="test" value="{{this}}">{{this}}</label>
-              </div>
-            {{/each}}
-
-          </div>
-          <label for="description">Tell us something about you:</label>
-          <textarea class="form-control" rows="5" id="description"></textarea>
-          <br>
-          <button type="submit" class="btn btn-default">Submit</button>
-        <!-- end form group -->
-        </form>
-      </div>
+        {{> login_first_time}}
       {{/if}}
 
     {{else}}

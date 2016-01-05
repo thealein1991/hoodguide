@@ -1,0 +1,55 @@
+<template name="login_first_time">
+  <div class="container">
+    <p class="mtl">It's your first time on hoodguide, so please fill out the following data:</p>
+    <form class="form-group">
+      <label>Are you using this app as a tourist or a guide?</label><br>
+      <!-- name und id von user soll auch gespeichert werden in nicht sichtbaren feldern -->
+      <label class="radio-inline"><input type="radio" name="optradio" value="tourist" id="radioTourist">Tourist</label>
+      <label class="radio-inline"><input type="radio" name="optradio" value="guide" id="radioGuide">Guide</label>
+      <br><br>
+
+      <textarea class="form-control" rows="1" id="username" style="display:none;">{{currentUser.services.facebook.name}}</textarea>
+      <textarea class="form-control" rows="1" id="userId" style="display:none;">{{currentUser.services.facebook.id}}</textarea>
+      <!-- if guide -->
+      <div id="showGuide" style="display:none;" class="animated fadeInLeft">
+        <label for="birthdate">Birth Date:</label>
+        <input type="date" class="form-control" id="birthdate_guide">
+        <br>
+        <label for="sel1">Select Hood:</label>
+        <select class="form-control" id="selectHood">
+          <option>Select Hood and then your districts</option>
+          {{#each hood}}
+            <option>{{hoodValue.name}}</option>
+          {{/each}}
+        </select>
+        <div class="checkbox" id="checkDistricts" style="display:none;">
+          {{#each districts}}
+            <div class="animated fadeIn">
+              <label><input type="checkbox" name="test" value="{{this}}">{{this}}</label>
+            </div>
+          {{/each}}
+        </div>
+        <label for="description">Tell us something about you:</label>
+        <textarea class="form-control" rows="5" id="description_guide"></textarea>
+        <br>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+      <!-- end if guide -->
+
+      <!-- if tourist -->
+      <div id="showTourist" style="display:none;" class="animated fadeInRight">
+        <label for="birthdate">Birth Date:</label>
+        <input type="date" class="form-control" id="birthdate_tourist">
+        <br>
+        <label for="description">Tell us something about you:</label>
+        <textarea class="form-control" rows="5" id="description_tourist"></textarea>
+        <br>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+      <!-- end if tourist -->
+
+
+    <!-- end form group -->
+    </form>
+  </div>
+</template>

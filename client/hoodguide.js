@@ -1,13 +1,30 @@
-if (Meteor.isClient) {
+
   // counter starts at 0
   // set language of login
   accountsUIBootstrap3.setLanguage('de');
   Session.setDefault('districts', []);
+  Session.setDefault('userdataExists', false);
   // districts = new Array();
 
 
-
   Template.login.events({
+    'click #facebook-login': function(event) {
+        Meteor.loginWithFacebook({}, function(err){
+            if (err) {
+                throw new Meteor.Error("Facebook login failed");
+            }
+        });
+    },
+    'click #logout': function(event) {
+        Meteor.logout(function(err){
+            if (err) {
+                throw new Meteor.Error("Logout failed");
+            }
+        })
+    }
+  });
+
+  Template.login_first_time.events({
     'change #selectHood': function(evt) {
         districts = [];
         var newValue = $(evt.target).val();
@@ -19,55 +36,79 @@ if (Meteor.isClient) {
                districts = obj.districts;
              }
          }
-         document.getElementById("checkDistricts").style.visibility ="visible";
+         document.getElementById("checkDistricts").style.display ="block";
          console.log(districts);
          Session.set('districts', districts);
+    },
+
+    'click #radioTourist': function(evt) {
+         document.getElementById("showTourist").style.display ="block";
+         document.getElementById("showGuide").style.display ="none";
+    },
+    'click #radioGuide': function(evt) {
+         document.getElementById("showGuide").style.display ="block";
+         document.getElementById("showTourist").style.display ="none";
     },
 
     'submit .form-group': function (event) {
       // Prevent default browser form submit
       event.preventDefault();
-      var description=  event.target.description.value;
-      var type = event.target.description.value;
-      var birthdate = event.target.birthdate.value;
+      var description;
+      var birthdate;
       var radio = $('input:radio[name="optradio"]:checked').val().toUpperCase();
-      var hood = event.target.selectHood.value;
-      var districts = $('input[name="test"]:checked');
-      // TODO: Districts
-    },
-
-    'click #facebook-login': function(event) {
-        Meteor.loginWithFacebook({}, function(err){
-            if (err) {
-                throw new Meteor.Error("Facebook login failed");
-            }
+      var username = event.target.username.value;
+      var userId = event.target.userId.value;
+      if(radio == 'TOURIST'){
+        description=  event.target.description_tourist.value;
+        birthdate = event.target.birthdate_tourist.value;
+        // save to db userdata
+        userdata.insert({
+          type: radio,
+          username: username,
+          userId : userId,
+          description : description,
+          birthdate : birthdate
         });
-    },
 
-    'click #logout': function(event) {
-        Meteor.logout(function(err){
-            if (err) {
-                throw new Meteor.Error("Logout failed");
-            }
-        })
+      } else{
+        description=  event.target.description_guide.value;
+        birthdate = event.target.birthdate_guide.value;
+        var hood = event.target.selectHood.value;
+        var districts  = $('input[name="test"]:checked');
+        var districtsSelected = [];
+        for(var i=0; i<districts.length; i++){
+          districtsSelected.push(districts[i].defaultValue);
+        }
+        // save to db userdata
+        userdata.insert({
+          type: radio,
+          username: username,
+          userId : userId,
+          description : description,
+          birthdate : birthdate,
+          hood: hood,
+          districts: districtsSelected
+        });
+      }
     }
   });
 
 
-  Template.login.helpers({
+  Template.login_first_time.helpers({
     hood : function () {
         return _.map(HOODS, function(val,key){return {name: key, hoodValue: val}});
     },
     districts : function () {
         return Session.get('districts');
-    },
+    }
   });
 
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
+  Template.login.helpers({
+    userdataExists: function(){
+        if(userdata.find({userId: Meteor.user().services.facebook.id}).fetch() != ''){
+          return true;
+        } else{
+          return false;
+        }
+    }
   });
-
-}

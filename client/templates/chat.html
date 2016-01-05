@@ -1,0 +1,38 @@
+
+<template name="chat">
+  <p class="hoodtitle text-center">chat</p><br>
+  <div class="container">
+    {{userdataExists}}
+    {{> messages }}
+    {{> input }}
+  </div>
+</template>
+
+<template name="messages">
+  {{#each messages}}
+  <div class="bg-grey">
+    <div class="row">
+      <div class="col-xs-2">
+        <img style="background-image:
+               url('http://graph.facebook.com/{{currentUser.services.facebook.id}}/picture/?type=large');"  class="fb-image-small animated fadeIn">
+      </div>
+      <div class="col-xs-10">
+        <strong>{{name}}:</strong> {{message}}<br>
+        <p style="font-size: 10px;">{{time}}</p>
+      </div>
+    </div>
+  </div>
+
+  {{/each}}
+</template>
+
+<template name="input">
+  <div class="row">
+    <div class="col-xs-9">
+      <input type="text"  class="form-control" id="message">
+    </div>
+    <div class="col-xs-2">
+      <button class="btn btn-default submit-chat">Submit</button>
+    </div>
+  </div>
+</template>
