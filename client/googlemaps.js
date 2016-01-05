@@ -1,0 +1,31 @@
+Meteor.startup(function() {
+    GoogleMaps.load();
+  });
+
+Template.home.onRendered(function() {
+GoogleMaps.load();
+});
+
+Template.home.helpers({
+  exampleMapOptions: function() {
+    // Make sure the maps API has loaded
+    if (GoogleMaps.loaded()) {
+      // Map initialization options
+      return {
+        center: new google.maps.LatLng(52.5167, 13.3833),
+        zoom: 13
+      };
+    }
+  }
+});
+
+Template.home.onCreated(function() {
+  // We can use the `ready` callback to interact with the map API once the map is ready.
+  GoogleMaps.ready('exampleMap', function(map) {
+    // Add a marker to the map once it's ready
+    var marker = new google.maps.Marker({
+      position: map.options.center,
+      map: map.instance
+    });
+  });
+});

@@ -39,8 +39,7 @@
   border-bottom: 1px solid #BCBCBC;
 }
 
-
-
+/* FONT*/
 .hoodtitle {
     font-family: 'Chalkduster';
     font-size: 30px;
@@ -64,13 +63,15 @@
   border: 1px solid #BCBCBC;
 }
 
+/* Menu Symbol */
 #btnRespNav{
   display:block;
-  font-size: 30px;
+  font-size: 35px;
   background-color: transparent;
   border-style: none;
 }
 
+/* Menu */
 .slideout-menu li a{
     color: #ffffff !important;
     margin-left: -35px;
@@ -87,4 +88,10 @@
 
 .slideout-menu a:hover{
   background-color:#29b5aa !important;
+}
+
+/* Google Maps */
+.map-container {
+  width: 400px;
+  height: 450px;
 }

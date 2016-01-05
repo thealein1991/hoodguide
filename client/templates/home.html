@@ -1,0 +1,12 @@
+<template name="home">
+    {{> slideMenu}}
+    <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
+    </button>
+    <div class="text-center bg-berlin">
+      <p class="hoodtitle">hoodguide</p><br>
+    </div>
+    <h3>Herzlich Willkommen {{currentUser.services.facebook.first_name}}</h3>
+    <div class="map-container">
+      {{> googleMap name="exampleMap" options=exampleMapOptions}}
+    </div>
+</template>
