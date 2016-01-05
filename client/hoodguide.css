@@ -66,9 +66,18 @@
 
 #btnRespNav{
   display:block;
-  font-size: 50px;
+  font-size: 30px;
   background-color: transparent;
   border-style: none;
+}
+
+.slideout-menu li a{
+    color: #ffffff !important;
+    margin-left: -35px;
+}
+
+.slideout-menu ul, li{
+  border-style: none !important;
 }
 
 .slideout-menu{
