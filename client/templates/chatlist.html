@@ -1,0 +1,37 @@
+<template name="chatlist">
+  {{> slideMenu}}
+  <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
+  </button>
+  <div class="text-center bg-berlin">
+    <p class="hoodtitle">Chats</p><br>
+  </div>
+  <div class="container">
+    {{userdataExists}}
+    {{> chatpartner }}
+  </div>
+</template>
+
+<template name="chatpartner">
+  <br>
+  {{#each allUsers}}
+  {{#if equals this.userId dataUser.userId}}
+      <!-- User won't chat with himself :D -->
+  {{else}}
+    <div class="bg-grey">
+      <div class="row">
+        <div class="col-xs-2">
+          <img style="background-image:
+                 url('http://graph.facebook.com/{{this.userId}}/picture/?type=large');"  class="fb-image-small animated fadeIn">
+        </div>
+        <div class="col-xs-10">
+          <strong><a href="/chat" class="usernames" data-value="{{this.userId}}">{{this.username}}</a></strong><br>
+
+        </div>
+      </div>
+    </div>
+
+  {{/if}}
+
+  {{/each}}
+
+</template>

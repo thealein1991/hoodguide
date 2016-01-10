@@ -1,8 +1,17 @@
-<template name="einstellungen">
+<template name="settings">
     {{> slideMenu}}
     <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
     </button>
     <div class="text-center bg-berlin">
       <p class="hoodtitle">Einstellungen</p><br>
+    </div>
+
+    <div class="container">
+      <h4> E-Mail Benachrichtigungen </h4>
+      <div class="checkbox">
+        <label><input type="checkbox" name="notificationMessages" checked>Neue Nachricht</label>
+      </div>
+      <br>
+      <a href="#" class="btn btn-default" id="clickSave">Speichern</a>
     </div>
 </template>

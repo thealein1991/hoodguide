@@ -1,18 +1,23 @@
 /* CSS declarations go here */
 .btn-primary{
   background-color:#006b66;
+  color: #FFFFFF !important;
+  margin:4px;
 }
 .btn-primary:hover {
   background-color:#29b5aa;
   border-color: #24A299;
+  margin:4px;
 }
 .btn-primary:active {
-  background-color:#29b5aa;
+  background-color:#006b66;
   border-color: #24A299;
+  margin:4px;
 }
 .btn-primary:visited {
-  background-color:#29b5aa;
+  background-color:#006b66;
   border-color: #24A299;
+  margin:4px;
 }
 .navbar{
   padding: 5px;
@@ -21,10 +26,14 @@
   background-color: #F5F5F5;
   border-radius: 5px;
   padding: 5px;
-  margin: 5px;
+  margin: 10px;
 }
 .mtl {
   margin-top: 10px;
+}
+
+.mbh {
+  margin-bottom: 20px;
 }
 .divider{
   margin: 10px 2px 10px 2px;
@@ -38,8 +47,6 @@
   background-color: #F1F1F1;
   border-bottom: 1px solid #BCBCBC;
 }
-
-
 
 .hoodtitle {
     font-family: 'Chalkduster';
@@ -56,6 +63,15 @@
   border: 1px solid #BCBCBC;
 }
 
+.fb-image-semi{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin:5px;
+  background-position: center;
+  border: 1px solid #BCBCBC;
+}
+
 .fb-image-small{
   border-radius: 50%;
   width: 30px;
@@ -66,7 +82,7 @@
 
 #btnRespNav{
   display:block;
-  font-size: 30px;
+  font-size: 35px;
   background-color: transparent;
   border-style: none;
 }
@@ -87,4 +103,17 @@
 
 .slideout-menu a:hover{
   background-color:#29b5aa !important;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+   color:#006b66;
+}
+
+h4{
+  color: #006b66;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

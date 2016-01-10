@@ -3,17 +3,9 @@
   <link rel="stylesheet" href="animate.min.css">
 </head>
 
-<!-- https://github.com/ianmartorell/meteor-accounts-ui-bootstrap-3/ -->
 <body>
 
 </body>
-
-<!-- <template name="home">
-  <div class="navbar navbar-default" role="navigation">
-        test
-  </div>
-</template> -->
-
 
 <template name="login">
     {{> slideMenu}}
@@ -27,9 +19,9 @@
              url('http://graph.facebook.com/{{currentUser.services.facebook.id}}/picture/?type=large');"  class="fb-image animated fadeIn">
       <p class="mtl">
         Hi! <br>
-        You are logged in as
+        Du bist eingeloggt als
         <b>{{currentUser.services.facebook.first_name}}
-        {{currentUser.services.facebook.last_name}}</b>
+        {{currentUser.services.facebook.last_name}} </b>
       </p>
     </div>
       {{#if userdataExists}}

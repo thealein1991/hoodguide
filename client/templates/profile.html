@@ -1,0 +1,109 @@
+<template name="yourprofile">
+  {{> slideMenu}}
+  <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
+  </button>
+  <div class="text-center bg-berlin">
+    <p class="hoodtitle">Dein Profil</p><br>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-7 col-md-7">
+        <br>
+        <img style="background-image:
+               url('http://graph.facebook.com/{{currentUser.services.facebook.id}}/picture/?type=large');"  class="fb-image-semi animated fadeIn">
+        <br>
+        <h4>Profilinfo</h4>
+        <div class="row">
+          <div class="col-xs-4 col-md-4"><b>Name:</b></div>
+          <div class="col-xs-7 col-md-7">{{dataUser.username}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-md-4"><b>Alter:</b></div>
+          <div class="col-xs-7 col-md-7">{{age}} Jahre</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-md-4"><b>Bezirk:</b></div>
+          <div class="col-xs-7 col-md-7">{{dataUser.hood}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-md-4"><b>Ortsteile:</b></div>
+          <div class="col-xs-7 col-md-7">{{dataUser.districts}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10 col-md-10 bg-grey">
+          <i>"{{dataUser.description}}"</i>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-5 col-md-5">
+        <br>
+        <h4>Bewertungen</h4>
+        {{#if dataUser.reviews}}
+          Bewertungen
+        {{/if}}
+        <p class="text-muted"><i>Noch keine Bewertungen</i></p>
+        <br>
+
+
+      </div>
+    </div>
+
+
+      <h4>Routen</h4>
+  </div>
+</template>
+
+
+<template name="profile">
+  {{> slideMenu}}
+  <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
+  </button>
+  <div class="text-center bg-berlin">
+    <p class="hoodtitle">{{touristdata.username}}</p><br>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-7 col-md-7">
+        <br>
+        <img style="background-image:
+               url('http://graph.facebook.com/{{touristdata.userId}}/picture/?type=large');"  class="fb-image-semi animated fadeIn">
+        <br>
+        <h4>Profilinfo</h4>
+        <div class="row">
+          <div class="col-xs-4 col-md-4"><b>Name:</b></div>
+          <div class="col-xs-7 col-md-7">{{touristdata.username}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-md-4"><b>Alter:</b></div>
+          <div class="col-xs-7 col-md-7">{{age}} Jahre</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-md-4"><b>Bezirk:</b></div>
+          <div class="col-xs-7 col-md-7">{{touristdata.hood}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-md-4"><b>Ortsteile:</b></div>
+          <div class="col-xs-7 col-md-7">{{touristdata.districts}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10 col-md-10 bg-grey">
+          <i>"{{touristdata.description}}"</i>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-5 col-md-5">
+        <br>
+        <h4>Bewertungen</h4>
+        {{#if touristdata.reviews}}
+          Bewertungen
+        {{/if}}
+        <p class="text-muted"><i>Noch keine Bewertungen</i></p>
+        <br>
+        <a href="#" class="btn btn-primary" data-value=""><i class="fa fa-star"></i> Bewerten</a>
+        <a href="/chat" class="sendMessage btn btn-primary" data-value="{{touristdata.userId}}"><i class="fa fa-envelope"></i> Nachricht</a>
+
+      </div>
+    </div>
+      <h4>Routen</h4>
+  </div>
+</template>

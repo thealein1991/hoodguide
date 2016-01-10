@@ -9,7 +9,7 @@
 
   Template.login.events({
     'click #facebook-login': function(event) {
-        Meteor.loginWithFacebook({}, function(err){
+        Meteor.loginWithFacebook({requestPermissions: ['email']}, function(err){
             if (err) {
                 throw new Meteor.Error("Facebook login failed");
             }
@@ -58,6 +58,7 @@
       var radio = $('input:radio[name="optradio"]:checked').val().toUpperCase();
       var username = event.target.username.value;
       var userId = event.target.userId.value;
+
       if(radio == 'TOURIST'){
         description=  event.target.description_tourist.value;
         birthdate = event.target.birthdate_tourist.value;
@@ -67,7 +68,8 @@
           username: username,
           userId : userId,
           description : description,
-          birthdate : birthdate
+          birthdate : birthdate,
+          email: Meteor.user().services.facebook.email
         });
 
       } else{
@@ -87,7 +89,8 @@
           description : description,
           birthdate : birthdate,
           hood: hood,
-          districts: districtsSelected
+          districts: districtsSelected,
+          email: Meteor.user().services.facebook.email
         });
       }
     }
@@ -95,9 +98,6 @@
 
 
   Template.login_first_time.helpers({
-    hood : function () {
-        return _.map(HOODS, function(val,key){return {name: key, hoodValue: val}});
-    },
     districts : function () {
         return Session.get('districts');
     }

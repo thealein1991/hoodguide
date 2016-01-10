@@ -1,0 +1,49 @@
+<template name="editprofile">
+    {{> slideMenu}}
+    <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
+    </button>
+    <div class="text-center bg-berlin">
+      <p class="hoodtitle">Profil bearbeiten</p><br>
+    </div>
+    <div class="container">
+      <br>
+      <form class="form-group">
+        <textarea class="form-control" rows="1" id="type" style="display:none;">{{dataUser.type}}</textarea>
+        <textarea class="form-control" rows="1" id="userId" style="display:none;">{{currentUser.services.facebook.id}}</textarea>
+        <!-- <label for="name">Username:</label>
+        <input type="name" class="form-control" id="username" value="{{dataUser.username}}"> -->
+        <br>
+        <label for="birthdate">Birth Date:</label>
+        <input type="date" class="form-control" id="birthdate" value="{{dataUser.birthdate}}">
+        <br>
+        <label for="sel1">Hood:</label>
+        <select class="form-control" id="selectHood">
+          {{#each hood}}
+            {{#if equals hoodValue.name dataUser.hood }}
+                <option selected>{{hoodValue.name}}</option>
+            {{else}}
+                <option>{{hoodValue.name}}</option>
+            {{/if}}
+          {{/each}}
+        </select>
+        <div class="checkbox" id="checkDistricts" style="display:none;">
+          {{#each districts}}
+            <div class="animated fadeIn">
+              <label><input type="checkbox" name="test" value="{{this}}">{{this}}</label>
+            </div>
+          {{/each}}
+        </div>
+        <div class="checkbox" id="checkedDistricts">
+          {{#each dataUser.districts}}
+              <label class="mtl"><input type="checkbox" value="{{this}}" checked="true">{{this}}</label>
+          {{/each}}
+        </div>
+        <p class="mbh"><a href="#" id="changeDistrics">Change Districs</a></p>
+        <label for="description">Description:</label>
+        <textarea class="form-control" rows="3" id="description" value="{{dataUser.description}}"></textarea>
+        <br>
+        <button type="submit" class="btn btn-default">Daten ändern</button>
+      </form>
+
+    </div>
+</template>
