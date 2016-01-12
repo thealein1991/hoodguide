@@ -48,10 +48,8 @@
   border-bottom: 1px solid #BCBCBC;
 }
 
-<<<<<<< HEAD:client/stylesheets/style.css
-=======
+
 /* FONT*/
->>>>>>> origin/master:client/hoodguide.css
 .hoodtitle {
     font-family: 'Chalkduster';
     font-size: 30px;
@@ -111,7 +109,6 @@
   background-color:#29b5aa !important;
 }
 
-<<<<<<< HEAD:client/stylesheets/style.css
 a:link,
 a:visited,
 a:hover,
@@ -123,10 +120,9 @@ h4{
   color: #006b66;
   margin-top: 15px;
   margin-bottom: 15px;
-=======
+
 /* Google Maps */
 .map-container {
   width: 400px;
   height: 450px;
->>>>>>> origin/master:client/hoodguide.css
 }
