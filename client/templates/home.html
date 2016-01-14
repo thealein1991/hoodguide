@@ -5,7 +5,15 @@
     <div class="text-center bg-berlin">
       <p class="hoodtitle">hoodguide</p><br>
     </div>
-    <h3>Herzlich Willkommen {{currentUser.services.facebook.first_name}}</h3>
+    <h3 align="center">Herzlich Willkommen {{currentUser.services.facebook.first_name}}</h3><br>
+    <label for="sel1">Select Hood:</label>
+    <select class="form-control" id="selectHood">
+      <option>Select Hood and then your districts</option>
+      {{#each hood}}
+        <option>{{hoodValue.name}}</option>
+      {{/each}}
+    </select> <br>
+
     <div class="map-container">
       {{> googleMap name="exampleMap" options=exampleMapOptions}}
     </div>

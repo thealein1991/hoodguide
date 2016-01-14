@@ -1,39 +1,17 @@
-<head>
-  <title>hoodguide</title>
-  <link rel="stylesheet" href="animate.min.css">
-</head>
-
-<body>
-
-</body>
-
 <template name="login">
-    {{> slideMenu}}
-    <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
-    </button>
     {{#if currentUser}}
-
-    <div class="text-center bg-berlin">
-      <p class="hoodtitle">hoodguide </p><br>
-      <img style="background-image:
-             url('http://graph.facebook.com/{{currentUser.services.facebook.id}}/picture/?type=large');"  class="fb-image animated fadeIn">
-      <p class="mtl">
-        Hi! <br>
-        Du bist eingeloggt als
-        <b>{{currentUser.services.facebook.first_name}}
-        {{currentUser.services.facebook.last_name}} </b>
-      </p>
-    </div>
       {{#if userdataExists}}
-          data here
+          {{> home}}
       {{else}}
         {{> login_first_time}}
       {{/if}}
 
     {{else}}
     <br>
-    <p class="hoodtitle">Hoodguide </p><br>
+    <div class="text-center bg-berlin">
+      <p class="hoodtitle">Hoodguide </p>
+    </div>
+    <br>
     <button id="facebook-login" class="btn btn-block btn-social btn-facebook text-center"> <span class="fa fa-facebook"></span> Login with Facebook</button>
-
     {{/if}}
 </template>

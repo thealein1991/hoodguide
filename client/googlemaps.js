@@ -7,6 +7,9 @@ GoogleMaps.load();
 });
 
 Template.home.helpers({
+  hood : function () {
+      return _.map(HOODS, function(val,key){return {name: key, hoodValue: val}});
+  },
   exampleMapOptions: function() {
     // Make sure the maps API has loaded
     if (GoogleMaps.loaded()) {
@@ -29,3 +32,12 @@ Template.home.onCreated(function() {
     });
   });
 });
+
+Template.home.events({
+  'change #selectHood': function(evt) {
+      var newValue = $(evt.target).val();
+      console.log('SELECTED VALUE ' + newValue);
+
+
+     }
+  });
