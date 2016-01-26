@@ -18,5 +18,6 @@ Template.settings.events({
             notifications : 'on'
         }});
       }
+      FlashMessages.sendSuccess("Einstellungen erfolgreich gespeichert!");
   }
 });

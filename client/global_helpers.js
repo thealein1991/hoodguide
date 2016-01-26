@@ -77,8 +77,15 @@ getCurrentUser = function(){
   return userdata.find({userId: Meteor.user().services.facebook.id}).fetch()[0];
 }
 
-getAge = function (dateString)
-{
+getReviews = function(id){
+  return Reviews.find({tourist_id: id}).fetch();
+}
+
+getImages = function(id){
+  return Images.find({user_id: id}).fetch();
+}
+
+getAge = function (dateString){
     var today = new Date();
     var birthDate = new Date(dateString);
     var age = today.getFullYear() - birthDate.getFullYear();
