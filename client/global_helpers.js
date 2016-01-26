@@ -19,11 +19,55 @@ Template.registerHelper("age", function () {
   return getAge(date);
 });
 
+var location=null;
+var map1;
+Template.registerHelper("googlemaps", function(){
+    // Make sure the maps API has loaded
+    if(location==null){
+      location='Potsdamer Platz, ';
+    } else {
+      location=Session.get('receiverSelect');
+    }
+
+    if (GoogleMaps.loaded()) {
+      geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': location + ' Berlin, Deutschland'}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        $(jQuery.parseJSON(JSON.stringify(results))).each(function() {
+         Session.set('receiverLat', this.geometry.location.lat);
+         Session.set('receiverLng', this.geometry.location.lng);
+         var latlng = new google.maps.LatLng(Session.get('receiverLat'), Session.get('receiverLng'));
+                  var mapOptions = {
+                      zoom: 13,
+                      center: latlng
+                  }
+         console.log(Session.get('receiverLat'),Session.get('receiverLng'));
+         map1 = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+                    var latlng = new google.maps.LatLng(Session.get('receiverLat'), Session.get('receiverLng'));
+                    map1.setCenter(latlng);
+                    var marker = new google.maps.Marker({
+                      position: latlng,
+                      map: map1
+                    });
+                    // marker.setMap(map);
+
+       });
+    } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+    }
+
+
+  });
+      return map1;
+      };
+
+});
+
 
 Template.registerHelper("equals", function (v1, v2) {
   return (v1 === v2);
 });
-
 
 getUser = function(id){
   return userdata.find({userId: id}).fetch()[0];

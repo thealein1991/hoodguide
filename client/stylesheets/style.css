@@ -123,7 +123,7 @@ h4{
 }
 
 /* Google Maps */
-.map-container {
+#map {
   width: 400px;
   height: 450px;
 }
