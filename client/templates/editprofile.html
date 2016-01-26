@@ -13,10 +13,10 @@
         <!-- <label for="name">Username:</label>
         <input type="name" class="form-control" id="username" value="{{dataUser.username}}"> -->
         <br>
-        <label for="birthdate">Birth Date:</label>
+        <label for="birthdate">Geburtstag:</label>
         <input type="date" class="form-control" id="birthdate" value="{{dataUser.birthdate}}">
         <br>
-        <label for="sel1">Hood:</label>
+        <label for="sel1">Bezirk:</label>
         <select class="form-control" id="selectHood">
           {{#each hood}}
             {{#if equals hoodValue.name dataUser.hood }}
@@ -38,12 +38,20 @@
               <label class="mtl"><input type="checkbox" value="{{this}}" checked="true">{{this}}</label>
           {{/each}}
         </div>
-        <p class="mbh"><a href="#" id="changeDistrics">Change Districs</a></p>
-        <label for="description">Description:</label>
+        <p class="mbh"><a href="#" id="changeDistrics">Ortsteile ändern</a></p>
+        <label for="description">Beschreibung:</label>
         <textarea class="form-control" rows="3" id="description" value="{{dataUser.description}}"></textarea>
         <br>
+        <label>Bild hochladen:</label>
+        {{> upload_bootstrap formData=specificFormData contentType='images' multiple=true}}
+        
+        <br><br>
         <button type="submit" class="btn btn-primary">Daten ändern</button>
         <a class="btn btn-primary" href="/yourprofile">zurück zum Profil</a>
+
+
+
+        {{> flashMessages}}
 
       </form>
 

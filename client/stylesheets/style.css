@@ -19,6 +19,9 @@
   border-color: #24A299;
   margin:4px;
 }
+.btn-info{
+  background-color:#24A299 !important;
+}
 .navbar{
   padding: 5px;
 }
@@ -48,7 +51,11 @@
   border-bottom: 1px solid #BCBCBC;
 }
 
-
+.border{
+  border: 1px solid #F1F1F1;
+  border-radius: 3px;
+  padding:5px;
+}
 /* FONT*/
 .hoodtitle {
     font-family: 'Chalkduster';
@@ -76,9 +83,10 @@
 
 .fb-image-small{
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background-position: center;
+  background-size: auto 60px;
   border: 1px solid #BCBCBC;
 }
 
@@ -122,8 +130,30 @@ h4{
   margin-bottom: 15px;
 }
 
+#facebook-login{
+  margin: 6px;
+  width:97%;
+}
 /* Google Maps */
 .map-container {
   width: 400px;
   height: 450px;
+}
+
+.mystar .current-rating {
+  color: #29b5aa;
+}
+
+.mystar .active {
+  color: #006b66;
+}
+
+.slideout-menu .slideout-menu-toggle{
+  background: none !important;
+  color:#e5e5e5;
+
+}
+
+.slideout-menu-toggle:hover {
+  border-radius: 50% !important;
 }

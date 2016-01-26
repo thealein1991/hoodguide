@@ -1,0 +1,22 @@
+<template name="rateTourist">
+  {{> slideMenu}}
+  <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
+  </button>
+  <div class="text-center bg-berlin">
+    <p class="hoodtitle">Bewerte {{touristdata.username}}</p><br>
+  </div>
+  <div class="container">
+    <br>
+    {{> starsRating id='rating' rating=0 class='mystar' size='lg' mutable=true}}
+    <div id="errorStars" class="text-danger" style="display:none;"> Bitte wählen sie Sterne aus! </div>
+    <br>
+    <label for="description_rating">Begründung:</label>
+    <textarea class="form-control" rows="5" id="description"></textarea>
+    <div id="errorDescription" class="text-danger" style="display:none;"> Bitte geben sie eine Begründung an!</div>
+    <br>
+
+    <button class="btn btn-default submit-rating">Absenden</button>
+    <br> <br>
+    {{> flashMessages}}
+  </div>
+</template>

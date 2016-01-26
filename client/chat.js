@@ -46,7 +46,7 @@ if (Meteor.isClient) {
 		  }
 
 	});
-
+	
 	Template.input.events = {
 	  'click .submit-chat' : function () {
 			var userId = Meteor.user().services.facebook.id;

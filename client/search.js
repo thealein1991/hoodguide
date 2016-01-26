@@ -1,7 +1,11 @@
 Session.setDefault('tourist_id', '');
-Session.setDefault('all', userdata.find().fetch());
+Session.setDefault('all', '');
 
-Template.search_guide.events({
+Template.guides.onCreated(function () {
+  Session.set('all', userdata.find().fetch());
+});
+
+Template.guides.events({
   'click .showprofile' : function (event) {
       Session.set('tourist_id', this.userId);
       Router.go('profile', {tourist_id: this.userId});
@@ -20,6 +24,7 @@ Template.search_guide.events({
 
 Template.guides.helpers({
   allTourists: function(){
+    console.log(Session.get('all'));
     return Session.get('all');
   }
 });

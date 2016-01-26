@@ -36,8 +36,6 @@ Template.editprofile.events({
     // Prevent default browser form submit
     event.preventDefault();
 
-
-    var username = event.target.username.value;
     var type = event.target.type.value;
     var description=  event.target.description.value;
     var birthdate = event.target.birthdate.value;
@@ -72,7 +70,27 @@ Template.editprofile.events({
           hood: hood,
           districts: districtsSelected
       }});
+      FlashMessages.sendSuccess("Profil erfolgreich aktualisiert!");
     }
+  }
+});
+Template.editprofile.helpers({
+  specificFormData: function() {
+    return {
+      user_id: Meteor.user().services.facebook.id
+    }
+  }
+});
+
+
+Template.yourprofile.helpers({
+  reviews: function(){
+    console.log(getReviews(Meteor.user().services.facebook.id));
+    return getReviews(Meteor.user().services.facebook.id);
+  },
+  images: function(){
+    console.log(getImages(Meteor.user().services.facebook.id));
+    return getImages(Meteor.user().services.facebook.id);
   }
 });
 
@@ -87,5 +105,65 @@ Template.profile.events({
 Template.profile.helpers({
   touristdata: function(){
     return getUser(Session.get('tourist_id'));
+  },
+  review: function(){
+    console.log(getReviews(Meteor.user().services.facebook.id));
+    return getReviews(Session.get('tourist_id'));
+  },
+  images: function(){
+    console.log(getImages(Session.get('tourist_id')));
+    return getImages(Session.get('tourist_id'));
   }
+});
+
+Template.profile.onRendered(function () {
+  //load Reviews
+    $('#gallery').justifiedGallery({
+    // option: default,
+      rowHeight: 120,
+      maxRowHeight: 0,
+      lastRow: 'nojustify',
+      fixedHeight: false,
+      captions: true,
+      margins: 1,
+      randomize: false,
+      extension: /.[^.]+$/,
+      refreshTime: 250,
+      waitThumbnailsLoad: true,
+      justifyThreshold: 0.35,
+      cssAnimation: true,
+      imagesAnimationDuration: 300
+    }).on('jg.complete', function (e) {
+      // this callback runs after the gallery layout is created
+    }).on('jg.resize', function (e) {
+      // this callback runs after the gallery is resized
+    }).on('jq.rowflush', function (e) {
+      // this callback runs when a new row is ready
+  });
+});
+
+Template.yourprofile.onRendered(function () {
+  //load Reviews
+    $('#gallery').justifiedGallery({
+    // option: default,
+      rowHeight: 120,
+      maxRowHeight: 0,
+      lastRow: 'nojustify',
+      fixedHeight: false,
+      captions: true,
+      margins: 1,
+      randomize: false,
+      extension: /.[^.]+$/,
+      refreshTime: 250,
+      waitThumbnailsLoad: true,
+      justifyThreshold: 0.35,
+      cssAnimation: true,
+      imagesAnimationDuration: 300
+    }).on('jg.complete', function (e) {
+      // this callback runs after the gallery layout is created
+    }).on('jg.resize', function (e) {
+      // this callback runs after the gallery is resized
+    }).on('jq.rowflush', function (e) {
+      // this callback runs when a new row is ready
+  });
 });

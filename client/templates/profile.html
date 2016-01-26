@@ -35,20 +35,53 @@
           </div>
         </div>
         <br>
-        <a class="btn btn-primary" href="/editprofile">Profil bearbeiten</a>
+        <div class="row">
+          <a class="btn btn-primary" href="/editprofile">Profil bearbeiten</a>
+        </div>
       </div>
       <div class="col-xs-5 col-md-5">
         <br>
         <h4>Bewertungen</h4>
-        {{#if dataUser.reviews}}
-          Bewertungen
+        {{#if reviews}}
+          {{#each reviews}}
+          <div class="border">
+            {{#if equals this.starsCount '1'}}
+              <p>{{> starsRating rating='1' id='rating' class='mystar'}}</p>
+            {{/if}}
+            {{#if equals this.starsCount '2'}}
+              <p>{{> starsRating rating='2' id='rating' class='mystar'}}</p>
+            {{/if}}
+            {{#if equals this.starsCount '3'}}
+              <p>{{> starsRating rating='3' id='rating' class='mystar'}}</p>
+            {{/if}}
+            {{#if equals this.starsCount '4'}}
+              <p>{{> starsRating rating='4' id='rating' class='mystar'}}</p>
+            {{/if}}
+            {{#if equals this.starsCount '5'}}
+              <p>{{> starsRating rating='5' id='rating' class='mystar'}}</p>
+            {{/if}}
+            <i>"{{this.description}}"</i><br>
+            &ndash; von {{this.from_username}}
+          </div>
+          {{/each}}
+        {{else}}
+          <p class="text-muted"><i>Noch keine Bewertungen</i></p>
         {{/if}}
-        <p class="text-muted"><i>Noch keine Bewertungen</i></p>
         <br>
       </div>
     </div>
     <br><br>
-      <h4>Routen</h4>
+    <h4>Bilder</h4>
+    <div id="gallery">
+      {{#each images}}
+        <a href="/img/{{this.path}}" class="swipebox">
+            <img src="/img/{{this.path}}" class="swipebox">
+        </a>
+      {{/each}}
+    </div>
+
+    <br><br>
+    <h4>Routen</h4>
   </div>
 </template>
 
@@ -61,6 +94,7 @@
     <p class="hoodtitle">{{touristdata.username}}</p><br>
   </div>
   <div class="container">
+    <div id="fb-root"></div>
     <div class="row">
       <div class="col-xs-7 col-md-7">
         <br>
@@ -93,15 +127,45 @@
       <div class="col-xs-5 col-md-5">
         <br>
         <h4>Bewertungen</h4>
-        {{#if touristdata.reviews}}
-          Bewertungen
+        {{#if review}}
+          {{#each review}}
+          <div class="border">
+            {{#if equals this.starsCount '1'}}
+              <p>{{> starsRating rating='1' id='rating' class='mystar'}}</p>
+            {{/if}}
+            {{#if equals this.starsCount '2'}}
+              <p>{{> starsRating rating='2' id='rating' class='mystar'}}</p>
+            {{/if}}
+            {{#if equals this.starsCount '3'}}
+              {{> starsRating rating='3' id='rating' class='mystar'}}<br>
+            {{/if}}
+            {{#if equals this.starsCount '4'}}
+              <p>{{> starsRating rating='4' id='rating' class='mystar'}}</p>
+            {{/if}}
+            {{#if equals this.starsCount '5'}}
+              <p>{{> starsRating rating='5' id='rating' class='mystar'}}</p>
+            {{/if}}
+            <i>"{{this.description}}"</i><br>
+            &ndash; von {{this.from_username}}
+          </div>
+          {{/each}}
+        {{else}}
+          <p class="text-muted"><i>Noch keine Bewertungen</i></p>
         {{/if}}
-        <p class="text-muted"><i>Noch keine Bewertungen</i></p>
         <br>
-        <a href="#" class="btn btn-primary" data-value=""><i class="fa fa-star"></i> Bewerten</a>
+        <a href="/rate" class="btn btn-primary" data-value="{{touristdata.userId}}"><i class="fa fa-star"></i> Bewerten</a>
         <a href="/chat" class="sendMessage btn btn-primary" data-value="{{touristdata.userId}}"><i class="fa fa-envelope"></i> Nachricht</a>
 
       </div>
+    </div>
+
+    <h4>Bilder</h4>
+    <div id="gallery">
+      {{#each images}}
+        <a href="/img/{{this.path}}" class="swipebox">
+            <img src="/img/{{this.path}}" class="swipebox">
+        </a>
+      {{/each}}
     </div>
       <h4>Routen</h4>
   </div>
