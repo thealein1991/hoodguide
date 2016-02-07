@@ -1,35 +1,39 @@
 
 Meteor.methods({
-    getPicturesFB: function() {
+    getFBUser: function() {
     var token= Meteor.user().services.facebook.accessToken;
     FBGraph.setAccessToken(token);
     var id= Meteor.user().services.facebook.id;
-    FBGraph.get("/"+id + "/albums", function(err, res) {
+    FBGraph.get("/"+id , function(err, res) {
       console.log(res); // { id: '4', name: 'Mark Zuckerberg'... }
     });
-    // FBGraph.get(id + '/albums', function(err, res) {
-    //   console.log(res); // { id: '4', name: 'Mark Zuckerberg'... }
-    // });
-
     },
-    postFB: function(){
+    postFB: function(message, id){
       var wallPost = {
-        message: 'Hallo'
+        message: message,
+        place: "Berlin",
+        tags: id
       };
       var token= Meteor.user().services.facebook.accessToken;
       FBGraph.setAccessToken(token);
-      FBGraph.post("me/feed", wallPost, function(err, res) {
+      var fbRes = Async.runSync(function(done) {
+        FBGraph.post("me/feed", wallPost, function(err, res) {
         // returns the post id
+
         console.log(res); // { id: xxxxx}
+        done(null, res.id);
+        });
       });
+      return fbRes.result;
     },
-    likePost: function(){
-      var postId = '175488706144958_178332482527247';
+    likeFB: function(post_id){
       var token= Meteor.user().services.facebook.accessToken;
       FBGraph.setAccessToken(token);
-      FBGraph.post(postId + "/likes", function(err, res) {
-        // returns the post id
+
+      FBGraph.post(post_id + "/likes", function(err, res) {
+
         console.log(res); // { id: xxxxx}
+
       });
 
     }

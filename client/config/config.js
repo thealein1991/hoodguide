@@ -1,4 +1,4 @@
-console.log('setting config');
+// console.log('setting config');
 
 Accounts.ui.config({
     requestPermissions: {

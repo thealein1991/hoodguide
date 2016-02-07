@@ -21,14 +21,16 @@
           <div class="col-xs-4 col-md-4"><b>Alter:</b></div>
           <div class="col-xs-7 col-md-7">{{age}} Jahre</div>
         </div>
-        <div class="row">
-          <div class="col-xs-4 col-md-4"><b>Bezirk:</b></div>
-          <div class="col-xs-7 col-md-7">{{dataUser.hood}}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-4 col-md-4"><b>Ortsteile:</b></div>
-          <div class="col-xs-7 col-md-7">{{dataUser.districts}}</div>
-        </div>
+        {{#if equals dataUser.type 'GUIDE'}}
+          <div class="row">
+            <div class="col-xs-4 col-md-4"><b>Bezirk:</b></div>
+            <div class="col-xs-7 col-md-7">{{dataUser.hood}}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4 col-md-4"><b>Ortsteile:</b></div>
+            <div class="col-xs-7 col-md-7">{{dataUser.districts}}</div>
+          </div>
+        {{/if}}
         <div class="row">
           <div class="col-xs-10 col-md-10 bg-grey">
           <i>"{{dataUser.description}}"</i>
@@ -62,27 +64,46 @@
             {{/if}}
             <i>"{{this.description}}"</i><br>
             &ndash; von {{this.from_username}}
+            {{#if this.fb_post_id}}
+              <br><br>
+              <textarea class="form-control" rows="1" id="fb_post" style="display:none;">{{this.fb_post_id}}</textarea>
+              <p><a class="btn btn-facebook" id="likeButton"><i class="fa fa-thumbs-o-up"></i> Like</a></p>
+            {{/if}}
           </div>
           {{/each}}
         {{else}}
           <p class="text-muted"><i>Noch keine Bewertungen</i></p>
         {{/if}}
+
         <br>
       </div>
     </div>
     <br><br>
     <h4>Bilder</h4>
     <div id="gallery">
-      {{#each images}}
-        <a href="/img/{{this.path}}" class="swipebox">
-            <img src="/img/{{this.path}}" class="swipebox">
-        </a>
-      {{/each}}
+      {{#if images}}
+        {{#each images}}
+          <a href="/img/{{this.path}}" class="swipebox">
+              <img src="/img/{{this.path}}" class="swipebox">
+          </a>
+        {{/each}}
+      {{else}}
+        <p class="text-muted"><i>Noch keine Bilder vorhanden</i></p>
+      {{/if}}
     </div>
-
     <br><br>
-    <h4>Routen</h4>
+    {{#if equals dataUser.type 'GUIDE'}}
+      <h4>Route</h4>
+      <div id="mapRoute"></div>
+      <div id="directions-panel"></div>
+      {{#if routes}}
+        <br><br><a href="/route" class="btn btn-primary">Route bearbeiten</a>
+      {{else}}
+        <br><br><a href="/route" class="btn btn-primary">Route erstellen</a>
+      {{/if}}
+    {{/if}}
   </div>
+  <br><br>
 </template>
 
 
@@ -123,6 +144,7 @@
           <i>"{{touristdata.description}}"</i>
           </div>
         </div>
+
       </div>
       <div class="col-xs-5 col-md-5">
         <br>
@@ -153,20 +175,34 @@
           <p class="text-muted"><i>Noch keine Bewertungen</i></p>
         {{/if}}
         <br>
-        <a href="/rate" class="btn btn-primary" data-value="{{touristdata.userId}}"><i class="fa fa-star"></i> Bewerten</a>
-        <a href="/chat" class="sendMessage btn btn-primary" data-value="{{touristdata.userId}}"><i class="fa fa-envelope"></i> Nachricht</a>
+        <a href="/rate/{{touristdata.userId}}" class="btn btn-primary" data-value="{{touristdata.userId}}"><i class="fa fa-star"></i> Bewerten</a>
+        <a href="/chat/{{touristdata.userId}}" class="sendMessage btn btn-primary" data-value="{{touristdata.userId}}"><i class="fa fa-envelope"></i> Nachricht</a>
 
       </div>
     </div>
 
     <h4>Bilder</h4>
     <div id="gallery">
-      {{#each images}}
-        <a href="/img/{{this.path}}" class="swipebox">
-            <img src="/img/{{this.path}}" class="swipebox">
-        </a>
-      {{/each}}
+      {{#if images}}
+        {{#each images}}
+          <a href="/img/{{this.path}}" class="swipebox">
+              <img src="/img/{{this.path}}" class="swipebox">
+          </a>
+        {{/each}}
+      {{else}}
+        <p class="text-muted"><i>Noch keine Bilder vorhanden</i></p>
+      {{/if}}
     </div>
-      <h4>Routen</h4>
+    <br><br>
+    {{#if equals touristdata.type 'GUIDE'}}
+      <h4>Route</h4>
+      {{#if routes}}
+      <div id="mapRoute"></div>
+      <div id="directions-panel"></div>
+      {{else}}
+        <p class="text-muted"><i>Noch keine Route vorhanden</i></p>
+      {{/if}}
+    {{/if}}
+
   </div>
 </template>

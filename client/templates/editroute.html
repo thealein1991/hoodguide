@@ -1,0 +1,50 @@
+<template name="editRoute">
+    {{> slideMenu}}
+    <button type="button" id="btnRespNav" class="btn-navbar navbar-toggle slideout-menu-toggle pull-left" data-toggle="collapse" data-target="#login-navbar-collapse"><i class="fa fa-bars"></i>
+    </button>
+    <div class="text-center bg-berlin">
+      <p class="hoodtitle">Route erstellen</p><br>
+    </div>
+    <div class="container">
+      <br>
+      Bitte gebe einen bestimmten Startpunkt und einen bestimmten Endpunkt ein, an dem deine Tour endet.
+      <br><br>
+      <form>
+        <input name="lat" id="latPlaces" type="text" value="" style="display:none;">
+        <input name="lng" id="lonPlaces" type="text" value="" style="display:none;">
+        <label for="placeInput">Ort:</label>
+        <div class="input-group">
+          <input id="placeInput" class="form-control" type="text" name="place" placeholder="Ort eingeben...">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" id="clickPlaces">+</button>
+          </span>
+        </div>
+
+      </form>
+      <br>
+      <label for="yelpInput">Gastronomie:</label>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Bar/Restaurant/Club eingeben..." id="yelpInput">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button" id="clickYelp">+</button>
+        </span>
+      </div>
+      <br>
+      {{#each addedPoints}}
+        <div class="row">
+          <div id="deletePlaces">
+            <div class="col-xs-8 col-md-8" id="placeAdded">{{this.place}}</div>
+            <div class="col-xs-4 col-md-4"><i class="fa fa-minus-circle colorGreen"></i></div>
+          </div>
+        </div>
+      {{/each}}
+
+      <br>
+      {{> flashMessages}}
+      <div id="map" style="display:none;"></div>
+      <!-- <iframe width="600" height="450" frameborder="0" style="border:0" src="{{pathGoogleMaps}}" allowfullscreen>
+      </iframe> -->
+      <a class="btn btn-primary" id="saveRoute">Route erstellen</a>
+
+    </div>
+</template>

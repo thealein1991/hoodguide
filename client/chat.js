@@ -23,11 +23,30 @@ if (Meteor.isClient) {
 
 	Template.chat.helpers({
 		receiver: function() {
-			return Session.get('receiver');
+			return Router.current().params.id;
 		},
 		receiverdata: function(){
-			return getUser(Session.get('receiver'));
+			return getUser(Router.current().params.id);
 		}
+
+	});
+	console.log(Session.get("infosIMG"));
+	Template.input.helpers({
+		specificFormDataChat: function() {
+			return {
+				user_id: Meteor.user().services.facebook.id,
+				chat: true
+			}
+		},
+		myCallbacks: function() {
+        return {
+            finished: function(index, fileInfo, context) {
+							console.log(context);
+							Session.set("infosIMG",fileInfo);
+						}
+        }
+    }
+
 	});
 
 	Template.chatlist.events({
@@ -46,7 +65,17 @@ if (Meteor.isClient) {
 		  }
 
 	});
-	
+	Template.input.onRendered(function () {
+		console.log(Session.get("infosIMG"));
+		(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	});
+
 	Template.input.events = {
 	  'click .submit-chat' : function () {
 			var userId = Meteor.user().services.facebook.id;
@@ -58,9 +87,11 @@ if (Meteor.isClient) {
 				receiver: Session.get('receiver'),
 			  message: message.value,
 			  time: new Date(),
+				image: Session.get("infosIMG").path
 			});
 
-			var receiver_email = getUser(Session.get('receiver')).email;
+			Session.set("infosIMG",'');
+			var receiver_email = getUser(Router.current().params.id).email;
 
 			var receiver_username = getUser(Session.get('receiver')).username;
 			var receiver_notifications = getUser(Session.get('receiver')).notifications;
@@ -71,10 +102,10 @@ if (Meteor.isClient) {
 	            receiver_email,
 	            'noreply@hoodguide.de',
 	            'Du hast eine neue Nachricht von ' + getCurrentUser().username,
-	            'Hallo '+receiver_username + '\n' +
-							'Du hast eine neue Nachricht von ' + getCurrentUser().username + ' : \n' +
+	            'Hallo '+ receiver_username +
+							'Du hast eine neue Nachricht von ' + getCurrentUser().username + ' : ' +
 							'"' + message.value +'"' +
-							'\n dein Hoodguide Team');
+							' dein Hoodguide Team');
 			} else {
 				console.log('Email Notifications OFF');
 			}

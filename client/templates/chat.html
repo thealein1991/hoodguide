@@ -23,14 +23,17 @@
       </div>
       <div class="col-xs-10">
         <strong>
-
           {{#if equals sender receiverdata.userId}}
             {{receiverdata.username}}
           {{else}}
             {{dataUser.username}}
           {{/if}}
 
-        </strong> {{message}}<br>
+        </strong>
+        {{message}}<br>
+        {{#if image}}
+        <img src="/img/{{image}}" width="350px">
+        {{/if}}
         <p style="font-size: 10px;">{{time}}</p>
       </div>
     </div>
@@ -45,8 +48,12 @@
       <input type="text"  class="form-control" id="message">
     </div>
     <div class="col-xs-2">
-      <button class="btn btn-default submit-chat">Submit</button>
+      <button class="btn btn-default submit-chat">Absenden</button>
     </div>
-    
-</div>
+  </div><br>
+  <b>Bild anhängen:</b><br>
+  {{> upload_bootstrap formData=specificFormDataChat contentType='images' multiple=true callbacks=myCallbacks}}
+  <br>
+  <div class="fb-send" data-href="https://hoodguide.de"></div>
+  <br><br>
 </template>

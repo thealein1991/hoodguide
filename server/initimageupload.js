@@ -16,11 +16,16 @@ Meteor.startup(function () {
     },
     finished: function(fileInfo, formData) {
       console.log('imageupload');
-      if (formData) {
-        Images.insert({
-          user_id: formData.user_id,
-          path: fileInfo.path
-        });
+      // Upload to chat
+      if(formData){
+        if(formData.chat){
+          console.log("callback to chat");
+        } else{
+          Images.insert({
+            user_id: formData.user_id,
+            path: fileInfo.path
+          });
+        }
       }
     },
     cacheTime: 100,

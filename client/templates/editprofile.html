@@ -10,8 +10,6 @@
       <form class="form-group">
         <textarea class="form-control" rows="1" id="type" style="display:none;">{{dataUser.type}}</textarea>
         <textarea class="form-control" rows="1" id="userId" style="display:none;">{{currentUser.services.facebook.id}}</textarea>
-        <!-- <label for="name">Username:</label>
-        <input type="name" class="form-control" id="username" value="{{dataUser.username}}"> -->
         <br>
         <label for="birthdate">Geburtstag:</label>
         <input type="date" class="form-control" id="birthdate" value="{{dataUser.birthdate}}">
@@ -44,7 +42,7 @@
         <br>
         <label>Bild hochladen:</label>
         {{> upload_bootstrap formData=specificFormData contentType='images' multiple=true}}
-        
+
         <br><br>
         <button type="submit" class="btn btn-primary">Daten ändern</button>
         <a class="btn btn-primary" href="/yourprofile">zurück zum Profil</a>
