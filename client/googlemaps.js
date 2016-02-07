@@ -1,4 +1,5 @@
 Meteor.startup(function() {
+<<<<<<< HEAD
     GoogleMaps.load({
       key: 'AIzaSyC3frpblGYNaC8RzIGKRGpWy3Gl0g67nGQ',
       libraries: 'places'  // also accepts an array if you need more than one
@@ -7,23 +8,11 @@ Meteor.startup(function() {
 
 Template.home.onRendered(function() {
 GoogleMaps.load();
+=======
+  GoogleMaps.load();
+>>>>>>> origin/master
 });
 
-Template.home.helpers({
-  hood : function () {
-      return _.map(HOODS, function(val,key){return {name: key, hoodValue: val}});
-  },
-  exampleMapOptions: function() {
-    // Make sure the maps API has loaded
-    if (GoogleMaps.loaded()) {
-      // Map initialization options
-      return {
-        center: new google.maps.LatLng(52.5167, 13.3833),
-        zoom: 13
-      };
-    }
-  }
-});
 
 Template.home.onCreated(function() {
   // We can use the `ready` callback to interact with the map API once the map is ready.
@@ -36,11 +25,35 @@ Template.home.onCreated(function() {
   });
 });
 
+Template.home.onRendered(function(){
+  GoogleMaps.load();
+});
+
+
+
+Session.setDefault('receiverLat', '');
+Session.setDefault('receiverLng', '');
+Session.setDefault('receiverSelect','');
+var location=null;
+
+Template.home.helpers({
+
+  hood : function () {
+      return _.map(HOODS, function(val,key){return {name: key, hoodValue: val}});
+  },
+
+  exampleMapOptions: function() {
+    var map1 = Blaze._globalHelpers.googlemaps();
+
+    }
+
+});
+
 Template.home.events({
   'change #selectHood': function(evt) {
       var newValue = $(evt.target).val();
+      location = Session.set('receiverSelect', newValue);
       console.log('SELECTED VALUE ' + newValue);
-
-
-     }
-  });
+      var map2 = Blaze._globalHelpers.googlemaps();
+  }
+});
