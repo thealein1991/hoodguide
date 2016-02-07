@@ -1,5 +1,4 @@
 Meteor.startup(function() {
-<<<<<<< HEAD
     GoogleMaps.load({
       key: 'AIzaSyC3frpblGYNaC8RzIGKRGpWy3Gl0g67nGQ',
       libraries: 'places'  // also accepts an array if you need more than one
@@ -7,10 +6,8 @@ Meteor.startup(function() {
   });
 
 Template.home.onRendered(function() {
-GoogleMaps.load();
-=======
   GoogleMaps.load();
->>>>>>> origin/master
+
 });
 
 
