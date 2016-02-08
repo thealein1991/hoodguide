@@ -15,10 +15,6 @@ Template.home.onCreated(function() {
   // We can use the `ready` callback to interact with the map API once the map is ready.
   GoogleMaps.ready('exampleMap', function(map) {
     // Add a marker to the map once it's ready
-    var marker = new google.maps.Marker({
-      position: map.options.center,
-      map: map.instance
-    });
   });
 });
 
@@ -27,12 +23,14 @@ Template.home.onRendered(function(){
 });
 
 
-
 Session.setDefault('receiverLat', '');
 Session.setDefault('receiverLng', '');
+Session.setDefault('receiverLatMarker', '');
+Session.setDefault('receiverLngMarker', '');
 Session.setDefault('receiverSelect','');
-var location=null;
+Session.setDefault('receiverCoord','');
 
+var location=null;
 Template.home.helpers({
 
   hood : function () {
@@ -40,17 +38,14 @@ Template.home.helpers({
   },
 
   exampleMapOptions: function() {
-    var map1 = Blaze._globalHelpers.googlemaps();
-
+    Blaze._globalHelpers.googlemaps();
     }
-
 });
 
 Template.home.events({
   'change #selectHood': function(evt) {
       var newValue = $(evt.target).val();
       location = Session.set('receiverSelect', newValue);
-      console.log('SELECTED VALUE ' + newValue);
-      var map2 = Blaze._globalHelpers.googlemaps();
+      Blaze._globalHelpers.googlemaps();
   }
 });

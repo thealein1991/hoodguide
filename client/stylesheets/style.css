@@ -14,6 +14,8 @@
    float: left;
    width: 100%;
  }
+
+
  #mapRoute {
   height: 450px;
   float: left;
@@ -153,11 +155,6 @@ h4{
 #facebook-login{
   margin: 6px;
   width:97%;
-}
-/* Google Maps */
-#map {
-  width: 400px;
-  height: 450px;
 }
 
 .mystar .current-rating {

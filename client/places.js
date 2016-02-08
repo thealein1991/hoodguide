@@ -23,14 +23,6 @@ Template.editRoute.onRendered(function() {
       console.log(result);
       Session.set("actualPlace", result.name);
     });
-    // if(!$("#placeInput").value){
-    //   var myOptions= {
-    //     zoom: 10,
-    //     center: {lat: 52.51, lng: 13.38}
-    //   }
-    //   console.log(document.getElementById("map"));
-    //   var map = new google.maps.Map(document.getElementById("map"), myOptions);
-    // }
     }
   });
   Session.set("userId", Meteor.user().services.facebook.id);
@@ -43,21 +35,7 @@ Session.set("resultYelp", 'hi');
 Template.editRoute.helpers({
   addedPoints: function(){
     return Routes.find({user_id:Session.get("userId") }).fetch();
-  },
-  // pathGoogleMaps: function(){
-  //     // I put the latitude and longitude in the session of the page
-  //     var points = Routes.find({user_id:Session.get("userId") }).fetch();
-  //     var path = "";
-  //     var origin= points[0].place;
-  //     var destination = points[3].place;
-  //
-  //     path = "https://www.google.com/maps/embed/v1/directions?key=AIzaSyC3frpblGYNaC8RzIGKRGpWy3Gl0g67nGQ"
-  //         + "&origin=" + origin
-  //         + "&destination=" + destination
-  //
-  //         + "&waypoints=Friedrichstraße+Potsdamer Platz";
-  //     return path;
-  // }
+  }
 });
 
 Template.editRoute.events({
